@@ -4,6 +4,12 @@ const ToDo = ({ toDo, deleteToDo }) => {
 
     const { id, description, category_id, } = toDo;
 
+    const handleDelete = () => {
+        deleteDonation(id);
+        fetch(`http://localhost:9292/todos/${id}`, {
+          method: "DELETE",
+        });
+      };
 
 
     return(
@@ -11,6 +17,7 @@ const ToDo = ({ toDo, deleteToDo }) => {
             <li>
                 <p>
                     Description: {description}, Category: {category_id}
+                    <button onClick={handleDelete}>Delete</button>
                 </p>
             </li>
         </div>
