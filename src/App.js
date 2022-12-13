@@ -13,7 +13,6 @@ const App = () => {
 
   return (
     <div className="App">
-      <h1>I am the App</h1>
       <h1 style={{textAlign: 'center'}}>To Do</h1>
       <ToDos categories={categories}/>
     </div>
