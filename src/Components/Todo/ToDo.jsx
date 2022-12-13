@@ -5,7 +5,7 @@ const ToDo = ({ toDo, deleteToDo }) => {
     const { id, description, category_id, } = toDo;
 
     const handleDelete = () => {
-        deleteDonation(id);
+        deleteToDo(id);
         fetch(`http://localhost:9292/todos/${id}`, {
           method: "DELETE",
         });
