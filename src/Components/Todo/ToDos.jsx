@@ -18,6 +18,7 @@ const ToDos = ({ categories }) => {
         setToDos(updatedToDos);
     }
 
+    // spreding the todos and adding my new todo to the end. 
     const addNewToDo = (toDo) => {
         setToDos([...ToDos, toDo]);
     };

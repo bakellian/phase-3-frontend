@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 const ToDo = ({ toDo, deleteToDo }) => {
 
-    const { id, description, category_id, } = toDo;
+    const { id, description, category_id } = toDo;
 
     const handleDelete = () => {
         deleteToDo(id);
