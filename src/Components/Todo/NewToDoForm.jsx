@@ -2,10 +2,6 @@ import React, { useState } from "react";
 
 const NewToDoForm = ({ categories, addNewToDo }) => {
 
-    // const [title, setTitle] = useState("");
-    // const [description, setDescription] = useState("");
-    // const [category, setCategory] = useState("")
-
     const [toDoData, setToDoData] = useState({
         title: "", 
         description: "",
@@ -22,7 +18,7 @@ const NewToDoForm = ({ categories, addNewToDo }) => {
         body: JSON.stringify({toDoData}),
     };
 
-
+    //think its not saving to backend because we need to post to "/categories/:category_id/todos"
     const handleSubmit = (e) => {
     e.preventDefault();
     // Make a POST request to create a new donation
