@@ -1,8 +1,15 @@
 import React, { useState } from "react";
+import EditToDo from "./EditToDo";
 
-const ToDo = ({ toDo, deleteToDo }) => {
+const ToDo = ({ toDo, deleteToDo, onUpdateToDo }) => {
 
-    const { id, description, category_id } = toDo;
+    const { id, title, description, category_id } = toDo;
+    const [isEditing, setIsEditing] = useState(false)
+
+    const handleToDoUpdate = (updatedToDo) => {
+        setIsEditing(false);
+        onUpdateToDo(updatedToDo);
+    }
 
     const handleDelete = () => {
         deleteToDo(id);
@@ -14,12 +21,22 @@ const ToDo = ({ toDo, deleteToDo }) => {
 
     return(
         <div>
-            <li>
+            {isEditing ? (
+                <EditToDo 
+                    toDo={toDo}
+                    onUpdateToDo={handleToDoUpdate}
+                />
+            ) : (
+            <li style={{ listStyleType: "none" }}>
                 <p>
-                    Description: {description}, Category: {category_id}
+                    Title: {title}, Description: {description}, Category: {category_id}
+                    <button onClick={() => setIsEditing((isEditing) => !isEditing)}>
+                        Edit
+                    </button>
                     <button onClick={handleDelete}>Delete</button>
                 </p>
             </li>
+            )}
         </div>
     )
 }

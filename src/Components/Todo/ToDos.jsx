@@ -23,12 +23,24 @@ const ToDos = ({ categories }) => {
         setToDos([...ToDos, toDo]);
     };
 
+    const handleUpdateToDo = (updatedToDo) => {
+        const updatedToDos = toDos.map((todo) => {
+            if (todo.id === updatedToDo.id) {
+                return updatedToDo;
+            } else {
+                return todo;
+            }
+        });
+        setToDos(updatedToDos)
+    }
+
 
     return (
         <div className="App">
             <ToDoList
                 toDos={toDos} 
                 deleteToDo={deleteToDo}
+                onUpdateToDo={handleUpdateToDo}
             />
             <NewToDoForm categories={categories} addNewToDo={addNewToDo} />
         </div>
