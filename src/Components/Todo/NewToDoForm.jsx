@@ -1,7 +1,22 @@
 import React, { useState } from "react";
+import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
+import { makeStyles } from '@material-ui/core/styles';
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    '& .MuiTextField-root': {
+      margin: theme.spacing(1),
+      width: '25ch',
+    },
+  },
+}));
+
 
 const NewToDoForm = ({ categories, addNewToDo }) => {
-
+  
+  const classes = useStyles();
+  
     const [toDoData, setToDoData] = useState({
         title: "", 
         description: "",
@@ -19,10 +34,11 @@ const NewToDoForm = ({ categories, addNewToDo }) => {
     };
 
     //think its not saving to backend because we need to post to "/categories/:category_id/todos"
+    //throwing a 404 error - request doesnt exist 
     const handleSubmit = (e) => {
     e.preventDefault();
-    // Make a POST request to create a new donation
-        fetch("http://localhost:9292/todos", configObj)
+    // Make a POST request to create a new todo
+        fetch("/categories/:category_id/todos", configObj)
         .then((resp) => resp.json())
         .then((todo) => {
             addNewToDo(todo);
@@ -32,8 +48,22 @@ const NewToDoForm = ({ categories, addNewToDo }) => {
     return (
     <div>
       <h3>Create a new todo:</h3>
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="amount">Title:</label>
+      <form className={classes.root} onSubmit={handleSubmit}>
+        <TextField 
+          id="filled-basic" 
+          label="Title" 
+          variant="filled"
+          value={toDoData.title}
+          onChange={(e) => setToDoData({...toDoData, title: e.target.value})}
+        />
+        <TextField
+          id="filled-basic" 
+          label="Description" 
+          variant="filled"
+          value={toDoData.description}
+          onChange={(e) => setToDoData({...toDoData, description: e.target.value})}
+        />
+        {/* <label htmlFor="amount">Title:</label>
         <input
           id="title"
           type="text"
@@ -41,15 +71,15 @@ const NewToDoForm = ({ categories, addNewToDo }) => {
           name="title"
           value={toDoData.title}
           onChange={(e) => setToDoData({...toDoData, title: e.target.value})}
-        />
-        <label htmlFor="date">Description:</label>
+        /> */}
+        {/* <label htmlFor="date">Description:</label>
         <input
           id="description_id"
           type="description"
           name="description"
           value={toDoData.description}
           onChange={(e) => setToDoData({...toDoData, description: e.target.value})}
-        />
+        /> */}
         <label>
           Category:
           <select
@@ -64,11 +94,11 @@ const NewToDoForm = ({ categories, addNewToDo }) => {
             ))}
           </select>
         </label>
-        <button type="submit">Add todo</button>
+        <Button variant="contained" color="primary" type="submit">Add todo</Button>
       </form>
     </div>
     );
-};
+  };
 
 
 export default NewToDoForm;

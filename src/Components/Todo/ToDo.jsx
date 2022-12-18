@@ -1,7 +1,20 @@
 import React, { useState } from "react";
 import EditToDo from "./EditToDo";
+import Button from '@material-ui/core/Button';
+import { makeStyles } from '@material-ui/core/styles';
+
+const useStyles = makeStyles((theme) => ({
+    root: {
+      '& > *': {
+        margin: theme.spacing(2),
+        width: '400ch',
+      },
+    },
+}));
 
 const ToDo = ({ toDo, deleteToDo, onUpdateToDo }) => {
+
+    const classes = useStyles();
 
     const { id, title, description, category_id } = toDo;
     const [isEditing, setIsEditing] = useState(false)
@@ -16,11 +29,10 @@ const ToDo = ({ toDo, deleteToDo, onUpdateToDo }) => {
         fetch(`http://localhost:9292/todos/${id}`, {
           method: "DELETE",
         });
-      };
-
+    };
 
     return(
-        <div>
+        <div className={classes.root}>
             {isEditing ? (
                 <EditToDo 
                     toDo={toDo}
@@ -30,10 +42,10 @@ const ToDo = ({ toDo, deleteToDo, onUpdateToDo }) => {
             <li style={{ listStyleType: "none" }}>
                 <p>
                     Title: {title}, Description: {description}, Category: {category_id}
-                    <button onClick={() => setIsEditing((isEditing) => !isEditing)}>
+                    <Button variant="contained" disableElevation onClick={() => setIsEditing((isEditing) => !isEditing)}>
                         Edit
-                    </button>
-                    <button onClick={handleDelete}>Delete</button>
+                    </Button>
+                    <Button variant="outlined" color="primary" onClick={handleDelete}>Delete</Button>
                 </p>
             </li>
             )}
