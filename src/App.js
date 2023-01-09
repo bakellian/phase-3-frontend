@@ -12,8 +12,8 @@ const App = () => {
   }, []);
 
   return (
-    <div className="App">
-      <h1 style={{textAlign: 'center'}}>To Do</h1>
+    <div className="container">
+      <h1>To Do</h1>
       <ToDos categories={categories}/>
     </div>
   );

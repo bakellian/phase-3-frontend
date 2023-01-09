@@ -12,7 +12,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const ToDo = ({ toDo, deleteToDo, onUpdateToDo }) => {
+const ToDo = ({ toDo, categories, deleteToDo, onUpdateToDo }) => {
 
     const classes = useStyles();
 
@@ -40,8 +40,10 @@ const ToDo = ({ toDo, deleteToDo, onUpdateToDo }) => {
                 />
             ) : (
             <li style={{ listStyleType: "none" }}>
+                <h3>{title}</h3>
                 <p>
-                    Title: {title}, Description: {description}, Category: {category_id}
+                    Description: {description}, 
+                    Category: {category_id}
                     <Button variant="contained" disableElevation onClick={() => setIsEditing((isEditing) => !isEditing)}>
                         Edit
                     </Button>

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import ToDo from "./ToDo";
 
-const ToDoList = ({ toDos, deleteToDo, onUpdateToDo }) => {
+const ToDoList = ({ toDos, deleteToDo, onUpdateToDo, categories }) => {
     return (
         <div>
             <h3>Your To Dos:</h3>
@@ -9,6 +9,7 @@ const ToDoList = ({ toDos, deleteToDo, onUpdateToDo }) => {
         <ToDo
           key={toDo.id}
           toDo={toDo}
+          cateogires={categories}
           deleteToDo={deleteToDo}
           onUpdateToDo={onUpdateToDo}
         />

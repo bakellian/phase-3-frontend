@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import ToDoList from "./ToDoList";
 import NewToDoForm from "./NewToDoForm"
+import NewCategoryForm from "../Category/NewCategoryForm";
 
 const ToDos = ({ categories }) => {
 
@@ -10,7 +11,7 @@ const ToDos = ({ categories }) => {
     useEffect(() => {
         fetch("http://localhost:9292/todos")
           .then((resp) => resp.json())
-          .then((todos) => setToDos(todos));
+          .then((toDos) => setToDos(toDos));
     }, []);
 
     const deleteToDo = (id) => {
@@ -20,7 +21,7 @@ const ToDos = ({ categories }) => {
 
     // spreding the todos and adding my new todo to the end. 
     const addNewToDo = (toDo) => {
-        setToDos([...ToDos, toDo]);
+        setToDos([...toDos, toDo]);
     };
 
     const handleUpdateToDo = (updatedToDo) => {
@@ -39,10 +40,12 @@ const ToDos = ({ categories }) => {
         <div className="App">
             <ToDoList
                 toDos={toDos} 
+                categories={categories}
                 deleteToDo={deleteToDo}
                 onUpdateToDo={handleUpdateToDo}
             />
             <NewToDoForm categories={categories} addNewToDo={addNewToDo} />
+            <NewCategoryForm />
         </div>
     );
 }

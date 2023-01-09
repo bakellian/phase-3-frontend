@@ -2,6 +2,12 @@ import React, { useState } from "react";
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import { makeStyles } from '@material-ui/core/styles';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -10,6 +16,10 @@ const useStyles = makeStyles((theme) => ({
       width: '25ch',
     },
   },
+  formControl: {
+    margin: theme.spacing(1),
+    minWidth: 120,
+  }
 }));
 
 
@@ -20,25 +30,22 @@ const NewToDoForm = ({ categories, addNewToDo }) => {
     const [toDoData, setToDoData] = useState({
         title: "", 
         description: "",
-        category: ""
     })
 
-    //what is configObj doing???
+    const [category_id, setCategoryId] = useState(null)
+
     const configObj = {
         method: "POST",
         headers: {
           Accept: "application/json",
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({toDoData}),
+        body: JSON.stringify({ toDoData }),
     };
 
-    //think its not saving to backend because we need to post to "/categories/:category_id/todos"
-    //throwing a 404 error - request doesnt exist 
     const handleSubmit = (e) => {
-    e.preventDefault();
-    // Make a POST request to create a new todo
-        fetch("/categories/:category_id/todos", configObj)
+      e.preventDefault();
+        fetch(`http://localhost:9292/categories/${category_id}/todos`, configObj)
         .then((resp) => resp.json())
         .then((todo) => {
             addNewToDo(todo);
@@ -63,28 +70,11 @@ const NewToDoForm = ({ categories, addNewToDo }) => {
           value={toDoData.description}
           onChange={(e) => setToDoData({...toDoData, description: e.target.value})}
         />
-        {/* <label htmlFor="amount">Title:</label>
-        <input
-          id="title"
-          type="text"
-          placeholder="title"
-          name="title"
-          value={toDoData.title}
-          onChange={(e) => setToDoData({...toDoData, title: e.target.value})}
-        /> */}
-        {/* <label htmlFor="date">Description:</label>
-        <input
-          id="description_id"
-          type="description"
-          name="description"
-          value={toDoData.description}
-          onChange={(e) => setToDoData({...toDoData, description: e.target.value})}
-        /> */}
-        <label>
+        {/* <label>
           Category:
           <select
             placeholder="Select Category"
-            onChange={(e) => setToDoData({...toDoData, category: e.target.value})}
+            onChange={(e) => setCategoryId(e.target.value)}
           >
             <option value="none">Select a category:</option>
             {categories.map((category) => (
@@ -93,7 +83,22 @@ const NewToDoForm = ({ categories, addNewToDo }) => {
               </option>
             ))}
           </select>
-        </label>
+        </label> */}
+        <FormControl variant="filled" className={classes.formControl}>
+        <InputLabel id="category-label">Category</InputLabel>
+        <Select
+          labelId="demo-simple-select-filled-label"
+          id="demo-simple-select-filled"
+          onChange={(e) => setCategoryId(e.target.value)}
+        >
+          {categories.map((category) => (
+              <option key={category.id} value={category.id}>
+                <MenuItem>{category.name}</MenuItem>
+              </option>
+            ))}
+      
+        </Select>
+      </FormControl>
         <Button variant="contained" color="primary" type="submit">Add todo</Button>
       </form>
     </div>
