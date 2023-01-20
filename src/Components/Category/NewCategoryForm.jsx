@@ -28,19 +28,17 @@ const NewCategoryForm = () => {
         name: ""
     })
 
+    const configObj = {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ categoryData }),
+    };
 
     const addNewCategory = (category) => {
         setCategoryData([...categoryData, category]);
-    };
-
-
-    const configObj = {
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ categoryData }),
     };
 
     const handleSubmit = (e) => {

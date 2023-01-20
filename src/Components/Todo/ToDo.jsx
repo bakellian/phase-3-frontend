@@ -2,12 +2,14 @@ import React, { useState } from "react";
 import EditToDo from "./EditToDo";
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
+import Divider from '@material-ui/core/Divider';
+
 
 const useStyles = makeStyles((theme) => ({
     root: {
       '& > *': {
         margin: theme.spacing(2),
-        width: '400ch',
+        width: '200px',
       },
     },
 }));
@@ -39,16 +41,16 @@ const ToDo = ({ toDo, categories, deleteToDo, onUpdateToDo }) => {
                     onUpdateToDo={handleToDoUpdate}
                 />
             ) : (
-            <li style={{ listStyleType: "none" }}>
+            <li style={{ listStyleType: "none" }} className={classes.root}>
                 <h3>{title}</h3>
-                <p>
-                    Description: {description}, 
-                    Category: {category_id}
+                <p>{description}</p>
                     <Button variant="contained" disableElevation onClick={() => setIsEditing((isEditing) => !isEditing)}>
                         Edit
                     </Button>
-                    <Button variant="outlined" color="primary" onClick={handleDelete}>Delete</Button>
-                </p>
+                    <Button variant="outlined" color="primary" onClick={handleDelete}>
+                        Delete
+                    </Button>
+                    <Divider light />
             </li>
             )}
         </div>

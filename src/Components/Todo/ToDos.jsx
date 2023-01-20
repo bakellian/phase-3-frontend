@@ -45,7 +45,6 @@ const ToDos = ({ categories }) => {
                 onUpdateToDo={handleUpdateToDo}
             />
             <NewToDoForm categories={categories} addNewToDo={addNewToDo} />
-            <NewCategoryForm />
         </div>
     );
 }

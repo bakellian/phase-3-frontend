@@ -70,20 +70,6 @@ const NewToDoForm = ({ categories, addNewToDo }) => {
           value={toDoData.description}
           onChange={(e) => setToDoData({...toDoData, description: e.target.value})}
         />
-        {/* <label>
-          Category:
-          <select
-            placeholder="Select Category"
-            onChange={(e) => setCategoryId(e.target.value)}
-          >
-            <option value="none">Select a category:</option>
-            {categories.map((category) => (
-              <option key={category.id} value={category.id}>
-                {category.name}
-              </option>
-            ))}
-          </select>
-        </label> */}
         <FormControl variant="filled" className={classes.formControl}>
         <InputLabel id="category-label">Category</InputLabel>
         <Select
@@ -99,7 +85,7 @@ const NewToDoForm = ({ categories, addNewToDo }) => {
       
         </Select>
       </FormControl>
-        <Button variant="contained" color="primary" type="submit">Add todo</Button>
+      <Button variant="contained" color="primary" type="submit">Add todo</Button>
       </form>
     </div>
     );
